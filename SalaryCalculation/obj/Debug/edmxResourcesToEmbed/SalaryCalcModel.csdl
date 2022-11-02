@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SalaryCalculationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Rank">
+    <Key>
+      <PropertyRef Name="Rank1" />
+    </Key>
+    <Property Name="Rank1" Type="Int32" Nullable="false" />
+    <Property Name="Coefficient" Type="Decimal" Precision="4" Scale="3" Nullable="false" />
+    <NavigationProperty Name="Worker" Relationship="Self.FK__Worker__Rank__29572725" FromRole="Rank" ToRole="Worker" />
+  </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkerID" Type="Int32" Nullable="false" />
+    <Property Name="MonthYear" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Accured" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Withheld" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Paid" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Worker" Relationship="Self.FK__Salary__WorkerID__286302EC" FromRole="Salary" ToRole="Worker" />
+  </EntityType>
+  <EntityType Name="Worker">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rank" Type="Int32" Nullable="false" />
+    <Property Name="UnionMembership" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Rank1" Relationship="Self.FK__Worker__Rank__29572725" FromRole="Worker" ToRole="Rank" />
+    <NavigationProperty Name="Salary" Relationship="Self.FK__Salary__WorkerID__286302EC" FromRole="Worker" ToRole="Salary" />
+  </EntityType>
+  <Association Name="FK__Worker__Rank__29572725">
+    <End Role="Rank" Type="Self.Rank" Multiplicity="1" />
+    <End Role="Worker" Type="Self.Worker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rank">
+        <PropertyRef Name="Rank1" />
+      </Principal>
+      <Dependent Role="Worker">
+        <PropertyRef Name="Rank" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Salary__WorkerID__286302EC">
+    <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+    <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worker">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Salary">
+        <PropertyRef Name="WorkerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SalaryCalculationEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Rank" EntityType="Self.Rank" />
+    <EntitySet Name="Salary" EntityType="Self.Salary" />
+    <EntitySet Name="Worker" EntityType="Self.Worker" />
+    <AssociationSet Name="FK__Worker__Rank__29572725" Association="Self.FK__Worker__Rank__29572725">
+      <End Role="Rank" EntitySet="Rank" />
+      <End Role="Worker" EntitySet="Worker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Salary__WorkerID__286302EC" Association="Self.FK__Salary__WorkerID__286302EC">
+      <End Role="Worker" EntitySet="Worker" />
+      <End Role="Salary" EntitySet="Salary" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

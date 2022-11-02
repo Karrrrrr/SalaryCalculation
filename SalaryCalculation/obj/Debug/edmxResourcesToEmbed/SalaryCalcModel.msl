@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище SalaryCalculationModelContainer" CdmEntityContainer="SalaryCalculationEntities">
+    <EntitySetMapping Name="Rank">
+      <EntityTypeMapping TypeName="SalaryCalculationModel.Rank">
+        <MappingFragment StoreEntitySet="Rank">
+          <ScalarProperty Name="Rank1" ColumnName="Rank" />
+          <ScalarProperty Name="Coefficient" ColumnName="Coefficient" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salary">
+      <EntityTypeMapping TypeName="SalaryCalculationModel.Salary">
+        <MappingFragment StoreEntitySet="Salary">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+          <ScalarProperty Name="MonthYear" ColumnName="MonthYear" />
+          <ScalarProperty Name="Accured" ColumnName="Accured" />
+          <ScalarProperty Name="Withheld" ColumnName="Withheld" />
+          <ScalarProperty Name="Paid" ColumnName="Paid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Worker">
+      <EntityTypeMapping TypeName="SalaryCalculationModel.Worker">
+        <MappingFragment StoreEntitySet="Worker">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="UnionMembership" ColumnName="UnionMembership" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
